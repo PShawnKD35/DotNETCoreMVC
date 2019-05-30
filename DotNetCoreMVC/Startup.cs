@@ -40,6 +40,7 @@ namespace DotNetCoreMVC
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>() //to Avoid error: https://stackoverflow.com/questions/52522248/store-does-not-implement-iuserrolestoretuser-asp-net-core-2-1-identity
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

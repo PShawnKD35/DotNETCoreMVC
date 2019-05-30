@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using Microsoft.AspNetCore.Identity
+@using DotNetCoreMVC.Models
+
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    var currentUser = await userManager.GetUserAsync(User);
+
+    var isAdmin = (currentUser != null)
+        && await userManager.IsInRoleAsync(currentUser, Constants.AdministratorRole);
+
+    if (isAdmin)
+    {
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="ManageUsers"
+                   asp-action="Index">
+                    Manage Users
+                </a>
+            </li>
+        </ul>
+    }
+}
