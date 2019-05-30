@@ -15,7 +15,9 @@ namespace DotNetCoreMVC
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            var host = CreateWebHostBuilder(args)
+                .UseUrls("https://*")
+                .Build();
             InitializeDatabase(host);
             host.Run();
         }
